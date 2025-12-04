@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -21,53 +18,32 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.vercel.app',
       },
-      // Aggiungi altri domini per immagini se necessario
     ],
     formats: ['image/webp', 'image/avif'],
   },
   env: {
-    MEDUSA_BACKEND_URL: process.env.MEDUSA_BACKEND_URL,
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    MEDUSA_BACKEND_URL: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
   },
-  // Ottimizzazioni per performance
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  // PWA e SEO
-  generateEtags: false,
+  // Configurazione semplificata per il deploy
   poweredByHeader: false,
-  // Rewrite per API
-  async rewrites() {
-    return [
-      {
-        source: '/api/medusa/:path*',
-        destination: `${process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000'}/:path*`,
-      },
-    ]
+  // Disabilitiamo temporaneamente le ottimizzazioni avanzate
+  swcMinify: true,
+  compiler: {
+    removeConsole: false, // Disabilitiamo per il debug
   },
-  // Headers per sicurezza
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-        ],
-      },
-    ]
+  // Disabilitiamo il build trace per evitare l'errore di stack overflow
+  experimental: {
+    outputFileTracingExcludes: {
+      '*': [
+        'node_modules/@swc/core-linux-x64-gnu',
+        'node_modules/@swc/core-linux-x64-musl',
+        'node_modules/@esbuild/linux-x64',
+      ],
+    },
   },
+  outputFileTracing: false,
 }
 
 module.exports = nextConfig

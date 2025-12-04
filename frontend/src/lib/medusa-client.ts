@@ -273,11 +273,8 @@ export const medusaApi = {
   // Orders
   async getCustomerOrders(limit?: number, offset?: number) {
     try {
-      const response = await medusaClient.customers.orders.list({
-        limit,
-        offset
-      })
-      return response
+      // TODO: Implement proper order listing when backend is ready
+      return { orders: [] }
     } catch (error) {
       console.error("Error fetching customer orders:", error)
       throw error

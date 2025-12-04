@@ -15,7 +15,7 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true, error: null })
         try {
           const response = await medusaApi.createCart()
-          set({ cart: response.cart, isLoading: false })
+          set({ cart: response.cart as any, isLoading: false })
           return response.cart
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Failed to create cart'
@@ -31,7 +31,7 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true, error: null })
         try {
           const response = await medusaApi.getCart(cart.id)
-          set({ cart: response.cart, isLoading: false })
+          set({ cart: response.cart as any, isLoading: false })
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Failed to load cart'
           set({ error: errorMessage, isLoading: false })
@@ -50,10 +50,14 @@ export const useCartStore = create<CartStore>()(
           cart = await get().createCart()
         }
 
+        if (!cart?.id) {
+          throw new Error('Failed to create or get cart')
+        }
+
         set({ isLoading: true, error: null })
         try {
           const response = await medusaApi.addToCart(cart.id, variantId, quantity)
-          set({ cart: response.cart, isLoading: false })
+          set({ cart: response.cart as any, isLoading: false })
           toast.success('Prodotto aggiunto al carrello')
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Failed to add item to cart'
@@ -75,7 +79,7 @@ export const useCartStore = create<CartStore>()(
           }
 
           const response = await medusaApi.updateCartItem(cart.id, itemId, quantity)
-          set({ cart: response.cart, isLoading: false })
+          set({ cart: response.cart as any, isLoading: false })
           toast.success('Carrello aggiornato')
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Failed to update cart item'
@@ -92,7 +96,7 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true, error: null })
         try {
           const response = await medusaApi.removeFromCart(cart.id, itemId)
-          set({ cart: response.cart, isLoading: false })
+          set({ cart: response.cart as any, isLoading: false })
           toast.success('Prodotto rimosso dal carrello')
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Failed to remove item from cart'

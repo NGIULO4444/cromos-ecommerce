@@ -212,12 +212,12 @@ export interface Customer {
   email: string
   first_name?: string
   last_name?: string
-  billing_address_id?: string
+  billing_address_id?: string | null
   phone?: string
   has_account: boolean
-  created_at: string
-  updated_at: string
-  deleted_at?: string
+  created_at: string | Date
+  updated_at: string | Date
+  deleted_at?: string | Date | null
   metadata?: Record<string, any>
   billing_address?: Address
   shipping_addresses: Address[]
@@ -507,7 +507,7 @@ export interface CartStore {
   removeItem: (itemId: string) => Promise<void>
   clearCart: () => void
   loadCart: () => Promise<void>
-  createCart: () => Promise<void>
+  createCart: () => Promise<any>
 }
 
 export interface AuthStore {

@@ -1,12 +1,12 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import { Navbar } from '@/components/layout/navbar'
-import { Footer } from '@/components/layout/footer'
-import { HeroSection } from '@/components/layout/hero-section'
-import { FeaturedProducts } from '@/components/product/featured-products'
-import { CategoryGrid } from '@/components/layout/category-grid'
-import { NewsletterSection } from '@/components/layout/newsletter-section'
-import { TrustBadges } from '@/components/layout/trust-badges'
+import Navbar from '@/components/layout/navbar'
+import Footer from '@/components/layout/footer'
+import HeroSection from '@/components/layout/hero-section'
+import FeaturedProducts from '@/components/product/featured-products'
+import CategoryGrid from '@/components/layout/category-grid'
+import NewsletterSection from '@/components/layout/newsletter-section'
+import TrustBadges from '@/components/layout/trust-badges'
 
 export const metadata: Metadata = {
   title: 'Cromos - Accessori Telefonia Online',
@@ -39,8 +39,8 @@ export default function HomePage() {
         <TrustBadges />
         
         {/* Featured Products */}
-        <section className="section-padding bg-gray-50">
-          <div className="max-w-7xl mx-auto container-padding">
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
                 Prodotti in Evidenza
@@ -56,8 +56,8 @@ export default function HomePage() {
         </section>
         
         {/* Category Grid */}
-        <section className="section-padding">
-          <div className="max-w-7xl mx-auto container-padding">
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
                 Categorie Prodotti
@@ -84,7 +84,7 @@ export default function HomePage() {
 // Loading Skeletons
 function FeaturedProductsSkeleton() {
   return (
-    <div className="product-grid">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {Array.from({ length: 8 }).map((_, i) => (
         <div key={i} className="card p-4">
           <div className="skeleton-image mb-4" />

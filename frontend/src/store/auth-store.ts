@@ -21,7 +21,7 @@ export const useAuthStore = create<AuthStore>()(
           const customerResponse = await medusaApi.getCustomer()
           
           set({ 
-            customer: customerResponse.customer, 
+            customer: customerResponse.customer as any, 
             isAuthenticated: true, 
             isLoading: false 
           })
@@ -73,7 +73,7 @@ export const useAuthStore = create<AuthStore>()(
         try {
           const response = await medusaApi.getCustomer()
           set({ 
-            customer: response.customer, 
+            customer: response.customer as any, 
             isAuthenticated: true, 
             isLoading: false 
           })
@@ -96,7 +96,7 @@ export const useAuthStore = create<AuthStore>()(
         try {
           const response = await medusaApi.updateCustomer(data)
           set({ 
-            customer: response.customer, 
+            customer: response.customer as any, 
             isLoading: false 
           })
           toast.success('Profilo aggiornato con successo')
