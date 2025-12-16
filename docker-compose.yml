@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  medusa-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - COOKIE_SECRET=${COOKIE_SECRET}
+      - PORT=9000
+      - HOST=0.0.0.0
+      - STORE_CORS=https://frontend-aryze8c3s-angelosann0-gmailcoms-projects.vercel.app
+      - ADMIN_CORS=https://frontend-aryze8c3s-angelosann0-gmailcoms-projects.vercel.app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=medusa
+      - POSTGRES_USER=medusa
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
