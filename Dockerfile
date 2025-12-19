@@ -27,5 +27,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvia l'applicazione con delay per Redis
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npm start"]
+# Reset completo database e avvio
+CMD ["sh", "-c", "sleep 10 && npx medusa migrations revert --number 999 || true && npx medusa migrations run && npx medusa user -e admin@cromos.it -p admin123 || true && npm start"]
