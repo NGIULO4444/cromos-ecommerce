@@ -1,0 +1,13 @@
+{
+  "store": {
+    "name": "Cromos E-commerce",
+    "default_currency_code": "eur",
+    "currencies": ["eur"]
+  },
+  "users": [
+    {
+      "email": "admin@cromos.it",
+      "password": "admin123"
+    }
+  ]
+}

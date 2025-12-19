@@ -30,12 +30,40 @@ const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
 const plugins = [
-  `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
   {
-    resolve: `@medusajs/file-local`,
+    resolve: `@medusajs/fulfillment`,
     options: {
-      upload_dir: "uploads",
+      providers: [
+        {
+          resolve: "@medusajs/fulfillment-manual",
+          id: "manual",
+        },
+      ],
+    },
+  },
+  {
+    resolve: `@medusajs/payment`,
+    options: {
+      providers: [
+        {
+          resolve: "@medusajs/payment-manual",
+          id: "manual",
+        },
+      ],
+    },
+  },
+  {
+    resolve: `@medusajs/file`,
+    options: {
+      providers: [
+        {
+          resolve: "@medusajs/file-local",
+          id: "local",
+          options: {
+            upload_dir: "uploads",
+          },
+        },
+      ],
     },
   },
 ];
@@ -43,9 +71,11 @@ const plugins = [
 const modules = {
   eventBus: {
     resolve: "@medusajs/event-bus-local",
+    options: {},
   },
   cacheService: {
     resolve: "@medusajs/cache-inmemory",
+    options: {},
   },
 };
 

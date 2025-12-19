@@ -29,5 +29,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio semplice con Medusa v2 (bug risolto)
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa user -e admin@cromos.it -p admin123 && npm start"]
+# Avvio Medusa v2 con seed
+CMD ["sh", "-c", "sleep 10 && npx medusa db:migrate && npx medusa user create --email admin@cromos.it --password admin123 && npm start"]
