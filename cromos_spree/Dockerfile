@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     imagemagick \
     vips-dev \
     curl \
-    libyaml-dev \
+    yaml-dev \
     libffi-dev \
     gcompat
 
