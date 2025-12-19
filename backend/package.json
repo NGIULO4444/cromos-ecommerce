@@ -28,7 +28,6 @@
     "migrate:revert": "typeorm migration:revert"
   },
   "dependencies": {
-    "@medusajs/admin": "^2.0.0",
     "@medusajs/cache-inmemory": "^2.0.0",
     "@medusajs/cache-redis": "^2.0.0",
     "@medusajs/event-bus-local": "^2.0.0",
@@ -42,8 +41,8 @@
     "dotenv": "16.3.1",
     "express": "^4.17.2",
     "express-rate-limit": "^7.1.5",
-    "@medusajs/fulfillment": "^2.0.0",
-    "@medusajs/payment": "^2.0.0",
+    "medusa-fulfillment-manual": "^1.1.40",
+    "medusa-payment-manual": "^1.0.24",
     "pg": "^8.11.3",
     "prism": "^4.1.2",
     "redis": "^4.6.10",

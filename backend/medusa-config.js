@@ -30,28 +30,8 @@ const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
 const plugins = [
-  {
-    resolve: `@medusajs/fulfillment`,
-    options: {
-      providers: [
-        {
-          resolve: "@medusajs/fulfillment-manual",
-          id: "manual",
-        },
-      ],
-    },
-  },
-  {
-    resolve: `@medusajs/payment`,
-    options: {
-      providers: [
-        {
-          resolve: "@medusajs/payment-manual",
-          id: "manual",
-        },
-      ],
-    },
-  },
+  `medusa-fulfillment-manual`,
+  `medusa-payment-manual`,
   {
     resolve: `@medusajs/file`,
     options: {

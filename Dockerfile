@@ -9,8 +9,8 @@ WORKDIR /app
 COPY backend/package*.json ./
 COPY backend/tsconfig*.json ./
 
-# Installa dipendenze
-RUN npm install
+# Installa dipendenze con legacy peer deps per Medusa v2
+RUN npm install --legacy-peer-deps
 
 # Copia il resto del codice backend
 COPY backend/ ./
