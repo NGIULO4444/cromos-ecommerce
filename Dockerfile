@@ -29,5 +29,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio Medusa v2 con setup completo
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa seed -f ./data/seed-complete.json && npx medusa develop"]
+# Avvio Medusa v2 diretto (bypassa CLI rotto)
+CMD ["sh", "-c", "sleep 10 && npm run start:simple"]
