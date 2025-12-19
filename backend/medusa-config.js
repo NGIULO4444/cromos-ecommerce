@@ -58,7 +58,13 @@ module.exports = {
     store_cors: STORE_CORS,
     database_url: DATABASE_URL,
     admin_cors: ADMIN_CORS,
+    database_logging: true,
   },
   plugins,
   modules,
+  
+  // Feature flags per abilitare servizi custom
+  featureFlags: {
+    product_categories: true,
+  },
 };
