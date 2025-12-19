@@ -1,0 +1,75 @@
+{
+  "store": {
+    "name": "Cromos E-commerce",
+    "default_currency_code": "eur",
+    "currencies": ["eur"]
+  },
+  "users": [
+    {
+      "email": "admin@cromos.it",
+      "password": "admin123",
+      "role": "admin"
+    }
+  ],
+  "regions": [
+    {
+      "name": "Europa",
+      "currency_code": "eur",
+      "countries": ["it", "fr", "de", "es"],
+      "payment_providers": ["manual"],
+      "fulfillment_providers": ["manual"]
+    }
+  ],
+  "shipping_options": [
+    {
+      "name": "Spedizione Standard",
+      "region": "Europa",
+      "provider_id": "manual",
+      "price": 500,
+      "data": {
+        "id": "manual-fulfillment"
+      }
+    },
+    {
+      "name": "Spedizione Express",
+      "region": "Europa", 
+      "provider_id": "manual",
+      "price": 1000,
+      "data": {
+        "id": "manual-fulfillment"
+      }
+    }
+  ],
+  "products": [
+    {
+      "title": "Cover iPhone 15",
+      "description": "Cover protettiva per iPhone 15",
+      "handle": "cover-iphone-15",
+      "status": "published",
+      "variants": [
+        {
+          "title": "Cover iPhone 15 - Trasparente",
+          "sku": "COVER-IP15-CLEAR",
+          "prices": [
+            {
+              "currency_code": "eur",
+              "amount": 1999
+            }
+          ],
+          "inventory_quantity": 100
+        },
+        {
+          "title": "Cover iPhone 15 - Nera",
+          "sku": "COVER-IP15-BLACK",
+          "prices": [
+            {
+              "currency_code": "eur", 
+              "amount": 1999
+            }
+          ],
+          "inventory_quantity": 100
+        }
+      ]
+    }
+  ]
+}
