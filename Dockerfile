@@ -27,5 +27,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvia l'applicazione
-CMD ["npm", "start"]
+# Avvia l'applicazione con migration
+CMD ["sh", "-c", "npx medusa migrations run && npm start"]
