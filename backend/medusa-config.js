@@ -31,7 +31,8 @@ const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-st
 
 const plugins = [
   `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
+  // Temporaneamente disabilitato per evitare crash
+  // `medusa-payment-manual`,
   {
     resolve: `@medusajs/file-local`,
     options: {
