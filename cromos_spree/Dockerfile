@@ -11,7 +11,10 @@ RUN apk add --no-cache \
     git \
     imagemagick \
     vips-dev \
-    curl
+    curl \
+    libyaml-dev \
+    libffi-dev \
+    gcompat
 
 # Copia Gemfile
 COPY Gemfile Gemfile.lock ./
