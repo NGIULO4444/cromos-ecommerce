@@ -23,7 +23,7 @@ ALLOWED_HOSTS=api.dev-solutions.it
 ### Domain Configuration:
 - **Host**: `api.dev-solutions.it`
 - **Service Name**: `spree`
-- **Container Port**: `3000`
+- **Container Port**: `9000`
 - **Path**: `/`
 
 ## 2. Genera Secret Key
