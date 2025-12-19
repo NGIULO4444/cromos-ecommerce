@@ -3,8 +3,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Installa postgresql-client per eseguire SQL
-RUN apk add --no-cache postgresql-client
+# Non serve più postgresql-client con Medusa v2
 
 # Copia i file del backend
 COPY backend/package*.json ./
@@ -30,5 +29,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio con inizializzazione SQL diretta + admin user
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && PGPASSWORD=${DATABASE_PASSWORD} psql ${DATABASE_URL} -f ./init-payment-providers.sql && npx medusa user -e admin@cromos.it -p admin123 && npm start"]
+# Avvio semplice con Medusa v2 (bug risolto)
+CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa user -e admin@cromos.it -p admin123 && npm start"]
