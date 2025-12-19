@@ -15,8 +15,8 @@ RUN npm install --legacy-peer-deps
 # Copia il resto del codice backend
 COPY backend/ ./
 
-# Build dell'applicazione
-RUN npm run build
+# Skip custom build for Medusa v2 (no custom code yet)
+# RUN npm run build
 
 # Esponi la porta
 EXPOSE 9000
@@ -29,5 +29,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio Medusa v2 con seed
-CMD ["sh", "-c", "sleep 10 && npx medusa db:migrate && npx medusa user create --email admin@cromos.it --password admin123 && npm start"]
+# Avvio Medusa v2 diretto (no build needed)
+CMD ["sh", "-c", "sleep 10 && npx medusa db:migrate && npx medusa user create --email admin@cromos.it --password admin123 && npx medusa start"]
