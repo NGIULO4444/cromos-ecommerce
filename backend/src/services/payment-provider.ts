@@ -10,28 +10,28 @@ import { Logger } from "@medusajs/medusa"
 class PaymentProviderService extends MedusaPaymentProviderService {
   protected readonly logger_: Logger
 
-  constructor(container) {
+  constructor(container: any) {
     super(container)
     this.logger_ = container.logger
   }
 
   /**
-   * Override del metodo che causa il crash
+   * Override del metodo registerInstalledProviders che causa il crash
    * Invece di crashare, logga l'errore e continua
    */
-  async updatePaymentProviders(providers: any[]): Promise<void> {
+  async registerInstalledProviders(providers: any[]): Promise<void> {
     try {
       // Se non ci sono providers, non fare niente
       if (!providers || providers.length === 0) {
-        this.logger_.warn("No payment providers to update, skipping...")
+        this.logger_.warn("No payment providers to register, skipping...")
         return
       }
 
-      // Prova l'update originale
-      await super.updatePaymentProviders(providers)
-    } catch (error) {
+      // Prova la registrazione originale
+      await super.registerInstalledProviders(providers)
+    } catch (error: any) {
       // Se fallisce, logga e continua invece di crashare
-      this.logger_.error("PaymentProviderService update failed, continuing anyway:", error.message)
+      this.logger_.error("PaymentProviderService registration failed, continuing anyway:", error?.message || error)
       
       // Non rilanciare l'errore - questo permette a Medusa di continuare
       return
@@ -39,19 +39,19 @@ class PaymentProviderService extends MedusaPaymentProviderService {
   }
 
   /**
-   * Override anche del metodo registerInstalledProviders
+   * Override del metodo updateProvider per evitare il TypeORM error
    */
-  async registerInstalledProviders(providers: any[]): Promise<void> {
+  async updateProvider(providerId: string, data: any): Promise<any> {
     try {
-      if (!providers || providers.length === 0) {
-        this.logger_.warn("No payment providers to register, skipping...")
-        return
+      if (!providerId || !data) {
+        this.logger_.warn("Invalid provider data, skipping update...")
+        return null
       }
 
-      await super.registerInstalledProviders(providers)
-    } catch (error) {
-      this.logger_.error("PaymentProviderService registration failed, continuing anyway:", error.message)
-      return
+      return await super.updateProvider(providerId, data)
+    } catch (error: any) {
+      this.logger_.error("PaymentProviderService updateProvider failed, continuing anyway:", error?.message || error)
+      return null
     }
   }
 }

@@ -27,5 +27,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio con inizializzazione database manuale
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa user -e admin@cromos.it -p admin123 && npm start"]
+# Avvio con seed minimal che funziona
+CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa seed -f ./data/seed-minimal.json && npm start"]
