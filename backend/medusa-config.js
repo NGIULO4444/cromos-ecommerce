@@ -42,17 +42,17 @@ const plugins = [
 
 const modules = {
   eventBus: {
-    resolve: "@medusajs/event-bus-redis",
-    options: {
+    resolve: process.env.REDIS_URL ? "@medusajs/event-bus-redis" : "@medusajs/event-bus-local",
+    options: process.env.REDIS_URL ? {
       redisUrl: process.env.REDIS_URL,
-    },
+    } : {},
   },
   cacheService: {
-    resolve: "@medusajs/cache-redis",
-    options: {
+    resolve: process.env.REDIS_URL ? "@medusajs/cache-redis" : "@medusajs/cache-inmemory",
+    options: process.env.REDIS_URL ? {
       redisUrl: process.env.REDIS_URL,
       ttl: 30,
-    },
+    } : {},
   },
 };
 
