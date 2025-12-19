@@ -3,7 +3,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Non serve più postgresql-client con Medusa v2
+# Installa curl per health check
+RUN apk add --no-cache curl
 
 # Copia i file del backend
 COPY backend/package*.json ./
