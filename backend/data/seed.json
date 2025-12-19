@@ -1,0 +1,84 @@
+{
+  "store": {
+    "currencies": ["eur"],
+    "default_currency_code": "eur",
+    "countries": ["it", "fr", "de", "es"]
+  },
+  "users": [
+    {
+      "email": "admin@cromos.it",
+      "password": "admin123"
+    }
+  ],
+  "regions": [
+    {
+      "name": "EU",
+      "currency_code": "eur",
+      "tax_rate": 0,
+      "payment_providers": [
+        "manual"
+      ],
+      "fulfillment_providers": [
+        "manual"
+      ],
+      "countries": ["it", "fr", "de", "es"]
+    }
+  ],
+  "shipping_options": [
+    {
+      "name": "Standard Shipping",
+      "region_id": "reg_01",
+      "provider_id": "manual",
+      "data": {
+        "id": "manual-fulfillment"
+      },
+      "price_type": "flat_rate",
+      "amount": 1000
+    }
+  ],
+  "products": [
+    {
+      "title": "Medusa T-Shirt",
+      "subtitle": "Comfortable cotton t-shirt",
+      "description": "A comfortable cotton t-shirt with the Medusa logo.",
+      "handle": "medusa-t-shirt",
+      "is_giftcard": false,
+      "weight": 400,
+      "images": ["https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-black-front.png"],
+      "options": [
+        {
+          "title": "Size",
+          "values": ["S", "M", "L", "XL"]
+        },
+        {
+          "title": "Color",
+          "values": ["Black", "White"]
+        }
+      ],
+      "variants": [
+        {
+          "title": "S / Black",
+          "sku": "shirt-s-black",
+          "inventory_quantity": 100,
+          "manage_inventory": true,
+          "prices": [
+            {
+              "currency_code": "eur",
+              "amount": 1950
+            }
+          ],
+          "options": [
+            {
+              "option_id": "opt_01",
+              "value": "S"
+            },
+            {
+              "option_id": "opt_02", 
+              "value": "Black"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

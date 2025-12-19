@@ -27,5 +27,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Reset completo database e avvio
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations revert --number 999 || true && npx medusa migrations run && npx medusa user -e admin@cromos.it -p admin123 || true && npm start"]
+# Avvio con seed completo
+CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa seed -f ./data/seed.json && npm start"]
