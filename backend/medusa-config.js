@@ -19,19 +19,16 @@ switch (process.env.NODE_ENV) {
 
 try {
   dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
-} catch (e) {
-  console.log("No .env file found");
-}
+} catch (e) {}
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000,http://localhost:3000";
+const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 
-const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-store";
+const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
-// Configurazione semplificata per test locale
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -41,43 +38,26 @@ const plugins = [
       upload_dir: "uploads",
     },
   },
-  {
-    resolve: "@medusajs/admin",
-    /** @type {import('@medusajs/admin').PluginOptions} */
-    options: {
-      autoRebuild: true,
-      develop: {
-        open: process.env.OPEN_BROWSER !== "false",
-      },
-    },
-  },
 ];
 
 const modules = {
   eventBus: {
-    resolve: "@medusajs/event-bus-local"
+    resolve: "@medusajs/event-bus-local",
   },
   cacheService: {
-    resolve: "@medusajs/cache-inmemory"
-  },
-};
-
-/** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
-const projectConfig = {
-  jwtSecret: process.env.JWT_SECRET || "supersecret",
-  cookieSecret: process.env.COOKIE_SECRET || "supersecret",
-  store_cors: STORE_CORS,
-  database_url: DATABASE_URL,
-  admin_cors: ADMIN_CORS,
-  database_logging: process.env.NODE_ENV !== "production",
-  database_extra: process.env.NODE_ENV !== "production" ? {} : {
-    ssl: { rejectUnauthorized: false }
+    resolve: "@medusajs/cache-inmemory",
   },
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
-  projectConfig,
+  projectConfig: {
+    jwt_secret: process.env.JWT_SECRET,
+    cookie_secret: process.env.COOKIE_SECRET,
+    store_cors: STORE_CORS,
+    database_url: DATABASE_URL,
+    admin_cors: ADMIN_CORS,
+  },
   plugins,
   modules,
 };

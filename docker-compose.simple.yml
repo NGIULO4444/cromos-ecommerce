@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  medusa:
+    image: ngiulo4444/cromos-medusa:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - COOKIE_SECRET=${COOKIE_SECRET}
+      - NODE_ENV=production
+      - PORT=9000
+      - HOST=0.0.0.0
+      - STORE_CORS=${STORE_CORS}
+      - ADMIN_CORS=${ADMIN_CORS}
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=medusa
+      - POSTGRES_USER=medusa
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
