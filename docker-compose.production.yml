@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  medusa:
+    build:
+      context: ./backend
+      dockerfile: ../Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - COOKIE_SECRET=${COOKIE_SECRET}
+      - NODE_ENV=production
+      - PORT=9000
+      - HOST=0.0.0.0
+      - STORE_CORS=${STORE_CORS}
+      - ADMIN_CORS=${ADMIN_CORS}
+      - MEDUSA_ADMIN_PATH=/app
+      - MEDUSA_ADMIN_ONBOARDING_TYPE=default
+      - MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  redis_data:
