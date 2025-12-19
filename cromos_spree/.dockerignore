@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Development
+log/*
+tmp/*
+.byebug_history
+
+# Testing
+test/
+spec/
+coverage/
+
+# Documentation
+README.md
+doc/
+
+# Environment
+.env
+.env.*
+!env.production.example
+
+# Node modules
+node_modules/
+
+# Assets (will be precompiled)
+public/assets/
+public/packs/
+
+# Database
+*.sqlite3
+*.sqlite3-journal
+
+# Mac
+.DS_Store

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  spree:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+      - SPREE_FRONTEND_URL=${SPREE_FRONTEND_URL}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  spree_data:
