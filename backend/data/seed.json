@@ -10,6 +10,18 @@
       "password": "admin123"
     }
   ],
+  "payment_providers": [
+    {
+      "id": "manual",
+      "is_installed": true
+    }
+  ],
+  "fulfillment_providers": [
+    {
+      "id": "manual",
+      "is_installed": true
+    }
+  ],
   "regions": [
     {
       "name": "EU",
