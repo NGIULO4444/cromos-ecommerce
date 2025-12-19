@@ -42,33 +42,10 @@ const plugins = [
 
 const modules = {
   eventBus: {
-    resolve: process.env.REDIS_URL ? "@medusajs/event-bus-redis" : "@medusajs/event-bus-local",
-    options: process.env.REDIS_URL ? {
-      redisUrl: process.env.REDIS_URL,
-      redisOptions: {
-        retryDelayOnFailover: 100,
-        maxRetriesPerRequest: 3,
-        lazyConnect: true,
-        keepAlive: 30000,
-        connectTimeout: 10000,
-        commandTimeout: 5000,
-      },
-    } : {},
+    resolve: "@medusajs/event-bus-local",
   },
   cacheService: {
-    resolve: process.env.REDIS_URL ? "@medusajs/cache-redis" : "@medusajs/cache-inmemory",
-    options: process.env.REDIS_URL ? {
-      redisUrl: process.env.REDIS_URL,
-      ttl: 30,
-      redisOptions: {
-        retryDelayOnFailover: 100,
-        maxRetriesPerRequest: 3,
-        lazyConnect: true,
-        keepAlive: 30000,
-        connectTimeout: 10000,
-        commandTimeout: 5000,
-      },
-    } : {},
+    resolve: "@medusajs/cache-inmemory",
   },
 };
 

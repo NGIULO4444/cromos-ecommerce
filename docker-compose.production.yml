@@ -9,7 +9,6 @@ services:
       - "9000:9000"
     environment:
       - DATABASE_URL=postgresql://neondb_owner:npg_FyaYW0qd5HZg@ep-sweet-voice-aga83jqy-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
-      - REDIS_URL=redis://redis:6379
       - JWT_SECRET=a286c85cb9b5a8be5bfb66d509acf6e317e9dc549e02957a8edacf8eab7558fb92cf3fe7157a2224110f4c6f0f656c264594c4c6e2aad978b4af0f8514b5a19e
       - COOKIE_SECRET=a1ef263a5e1939a8fadc18b3da28bb4f91e98a1740bf3a741df7eb26ca1031325087e521b250f406a6b5792dd25b8eebd6b36feb001aa2dc75affe07417b7cf8
       - NODE_ENV=production
@@ -20,9 +19,6 @@ services:
       - MEDUSA_ADMIN_PATH=/app
       - MEDUSA_ADMIN_ONBOARDING_TYPE=default
       - MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
-    depends_on:
-      redis:
-        condition: service_healthy
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
@@ -30,20 +26,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 180s
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    command: redis-server --appendonly yes
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-volumes:
-  redis_data:
