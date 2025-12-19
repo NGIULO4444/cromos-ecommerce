@@ -13,8 +13,8 @@ RUN npm install
 # Copia il resto del codice backend
 COPY backend/ ./
 
-# Build dell'applicazione
-RUN npm run clean && npm run build:server && MEDUSA_ADMIN_PATH=/app npm run build:admin
+# Build dell'applicazione (solo server)
+RUN npm run clean && npm run build:server
 
 # Esponi la porta
 EXPOSE 9000
@@ -24,6 +24,8 @@ ENV NODE_ENV=production
 ENV PORT=9000
 ENV HOST=0.0.0.0
 ENV MEDUSA_ADMIN_PATH=/app
+ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
+ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
 # Avvia l'applicazione
 CMD ["npm", "start"]
