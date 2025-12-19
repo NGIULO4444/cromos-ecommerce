@@ -1,0 +1,4 @@
+storefront_css: bin/rails tailwindcss:watch
+
+admin_css: bin/rails dartsass:watch
+web: bin/rails s -p 3000

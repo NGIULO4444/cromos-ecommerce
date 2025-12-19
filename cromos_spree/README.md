@@ -1,81 +1,24 @@
-# Cromos E-commerce - Spree Backend
+# README
 
-Backend e-commerce basato su Spree Commerce per il progetto Cromos.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## 🚀 Quick Start
+Things you may want to cover:
 
-### Sviluppo Locale
+* Ruby version
 
-```bash
-# Installa dipendenze
-bundle install
+* System dependencies
 
-# Setup database
-rails db:create db:migrate db:seed
+* Configuration
 
-# Avvia server
-bin/dev
-```
+* Database creation
 
-### Accesso
+* Database initialization
 
-- **Storefront**: http://localhost:3000
-- **Admin Panel**: http://localhost:3000/admin
-- **API**: http://localhost:3000/api/v2/storefront
+* How to run the test suite
 
-### Credenziali Admin
+* Services (job queues, cache servers, search engines, etc.)
 
-- **Email**: angelosann0@gmail.com
-- **Password**: callenger
+* Deployment instructions
 
-## 📦 Deploy Produzione
-
-Vedi [deploy-dokploy.md](./deploy-dokploy.md) per istruzioni complete.
-
-### Environment Variables
-
-Copia `env.production.example` e configura:
-
-```bash
-DATABASE_URL=your_neon_postgresql_url
-SECRET_KEY_BASE=your_generated_secret
-```
-
-### Docker
-
-```bash
-# Build
-docker build -t cromos-spree .
-
-# Run
-docker run -p 3000:3000 --env-file .env cromos-spree
-```
-
-## 🔗 API Endpoints
-
-### Storefront API
-
-- `GET /api/v2/storefront/products` - Lista prodotti
-- `GET /api/v2/storefront/products/:id` - Dettaglio prodotto
-- `POST /api/v2/storefront/cart` - Crea carrello
-- `POST /api/v2/storefront/checkout` - Checkout
-
-### Admin API
-
-- `GET /api/v2/platform/products` - Gestione prodotti
-- `GET /api/v2/platform/orders` - Gestione ordini
-
-Documentazione completa: https://spreecommerce.org/docs/api
-
-## 🛠️ Tech Stack
-
-- **Framework**: Ruby on Rails 8
-- **E-commerce**: Spree Commerce 5.2
-- **Database**: PostgreSQL (Neon)
-- **Deployment**: Docker + Dokploy
-
-## 📚 Documentazione
-
-- [Spree Developer Docs](https://spreecommerce.org/docs/developer)
-- [Spree API Reference](https://spreecommerce.org/docs/api)
-- [Deploy Guide](./deploy-dokploy.md)
+* ...
