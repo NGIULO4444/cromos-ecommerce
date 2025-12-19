@@ -13,8 +13,8 @@ RUN npm install
 # Copia il resto del codice backend
 COPY backend/ ./
 
-# Build dell'applicazione (solo server)
-RUN npm run clean && npm run build:server
+# Build dell'applicazione
+RUN npm run build
 
 # Esponi la porta
 EXPOSE 9000
