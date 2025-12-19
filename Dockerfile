@@ -3,6 +3,9 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Installa postgresql-client per eseguire SQL
+RUN apk add --no-cache postgresql-client
+
 # Copia i file del backend
 COPY backend/package*.json ./
 COPY backend/tsconfig*.json ./
@@ -27,5 +30,5 @@ ENV MEDUSA_ADMIN_PATH=/app
 ENV MEDUSA_ADMIN_ONBOARDING_TYPE=default
 ENV MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY=./
 
-# Avvio con seed minimal che funziona
-CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && npx medusa seed -f ./data/seed-minimal.json && npm start"]
+# Avvio con inizializzazione SQL diretta + admin user
+CMD ["sh", "-c", "sleep 10 && npx medusa migrations run && PGPASSWORD=${DATABASE_PASSWORD} psql ${DATABASE_URL} -f ./init-payment-providers.sql && npx medusa user -e admin@cromos.it -p admin123 && npm start"]
