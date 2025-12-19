@@ -12,12 +12,12 @@
 ### Environment Variables:
 ```env
 RAILS_ENV=production
-DATABASE_URL=postgresql://neondb_owner:npg_FyaYW0qd5HZg@ep-sweet-voice-aga83jqy-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require
-SECRET_KEY_BASE=your_generated_secret_key_here
+DATABASE_URL=postgresql://neondb_owner:npg_BjtimTg9FZ3l@ep-muddy-base-ag94cts6-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require
+SECRET_KEY_BASE=d868d72f0f56e61e2db1019a50f2ee193c842853cc9cb07540c306eaf2990f2b6aa7f228126430f015e74741bda73da76183b055cb0fda241d631ebb4dd3190f
 RAILS_SERVE_STATIC_FILES=true
 RAILS_LOG_TO_STDOUT=true
 SPREE_FRONTEND_URL=https://cromos-ecommerce.vercel.app
-ALLOWED_HOSTS=api.dev-solutions.it,cromos-ecommerce.vercel.app
+ALLOWED_HOSTS=api.dev-solutions.it
 ```
 
 ### Domain Configuration:
